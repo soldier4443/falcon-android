@@ -1,0 +1,8 @@
+<resources>
+  <string name="app_name">Falcon</string>
+  <string name="menu_feed">피드</string>
+  <string name="menu_profile">프로필</string>
+  <string name="menu_settings">설정</string>
+
+  <string name="feed_author_template">by %1$s</string>
+</resources>
