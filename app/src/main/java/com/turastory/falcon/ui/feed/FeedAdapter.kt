@@ -23,7 +23,21 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
     override fun getItemCount() = feeds.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(feeds[position])
+        holder.bind(feeds[position]) { like ->
+            if (like) {
+                feeds[position].apply {
+                    this.like++
+                    this.markAsLiked = true
+                }
+            } else {
+                feeds[position].apply {
+                    this.like--
+                    this.markAsLiked = false
+                }
+            }
+        
+            notifyItemChanged(position)
+        }
     }
 
     fun updateItems(items: List<Feed>) {
@@ -39,7 +53,7 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(feed: Feed) {
+        fun bind(feed: Feed, onLiked: (Boolean) -> Unit) {
             // TODO: 이미지 보여주기
             // TODO: content 너무 길 경우 요약
             with(itemView) {
@@ -48,6 +62,28 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
                 likeCountText.text = "${feed.like}"
                 commentCountText.text = "${feed.comments}"
                 contentText.text = feed.content
+    
+                if (feed.markAsLiked) {
+                    markAsLiked(onLiked)
+                } else {
+                    unmarkAsLiked(onLiked)
+                }
+            }
+        }
+    
+        private fun View.unmarkAsLiked(onLikeStateChanged: (Boolean) -> Unit) {
+            likeButton.background = null
+            likeImage.setImageResource(R.drawable.ic_like_outline)
+            likeButton.setOnClickListener {
+                onLikeStateChanged(true)
+            }
+        }
+    
+        private fun View.markAsLiked(onLikeStateChanged: (Boolean) -> Unit) {
+            likeButton.setBackgroundResource(R.drawable.bg_button)
+            likeImage.setImageResource(R.drawable.ic_like)
+            likeButton.setOnClickListener {
+                onLikeStateChanged(false)
             }
         }
     }

@@ -18,4 +18,5 @@ data class Feed(@PrimaryKey val id: Long,
                 var created: Date = Date(),
                 var comments: Int = 0,
                 var like: Int = 0,
-                var content: String = "")
+                var content: String = "",
+                var markAsLiked: Boolean)
