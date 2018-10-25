@@ -10,20 +10,21 @@ import io.reactivex.Single
  *
  * TODO: Add remote data source, cache.
  */
-class FeedDataSourceImpl(private val memoryDataSource: FeedMemoryDataSource, localDataSource: FeedLocalDataSource) : FeedDataSource {
+class FeedDataSourceImpl(private val memoryDataSource: FeedMemoryDataSource,
+                         private val localDataSource: FeedLocalDataSource) : FeedDataSource {
     override fun getAllFeeds(): Single<List<Feed>> {
-        return memoryDataSource.getAllFeeds()
+        return localDataSource.getAllFeeds()
     }
 
     override fun addNewFeed(feed: Feed): Completable {
-        return memoryDataSource.addNewFeed(feed)
+        return localDataSource.addNewFeed(feed)
     }
 
     override fun clearAllFeeds(): Completable {
-        return memoryDataSource.clearAllFeeds()
+        return localDataSource.clearAllFeeds()
     }
 
     override fun updateFeed(newFeed: Feed): Completable {
-        return memoryDataSource.updateFeed(newFeed)
+        return localDataSource.updateFeed(newFeed)
     }
 }
