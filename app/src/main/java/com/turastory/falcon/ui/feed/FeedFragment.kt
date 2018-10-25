@@ -8,9 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.turastory.falcon.Provider
 import com.turastory.falcon.R
-import com.turastory.falcon.data.source.FeedDataSource
 import com.turastory.falcon.data.source.local.Feed
 import com.turastory.falcon.ui.plusAssign
 import com.turastory.falcon.ui.random
@@ -37,6 +35,10 @@ class FeedFragment : Fragment() {
 
     private var subscription: Disposable? = null
 
+    fun setViewModel(feedViewModel: FeedViewModel) {
+        this.viewModel = feedViewModel
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.feed_fragment, container, false)
@@ -44,11 +46,8 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        context?.apply {
-            Provider.provideDataSource(this)?.also { dataSource ->
-                initializeViewModel(dataSource)
-            }
-        }
+
+        setupFeedRecyclerView()
     }
 
     override fun onStart() {
@@ -71,29 +70,26 @@ class FeedFragment : Fragment() {
         compositeDisposable.dispose()
     }
 
-    private fun initializeViewModel(dataSource: FeedDataSource) {
-        viewModel = FeedViewModel(dataSource)
-        viewModel?.let { vm ->
-            feedListView.apply {
-                layoutManager = LinearLayoutManager(context).apply {
-                    reverseLayout = true
-                    stackFromEnd = true
-                }
-
-                adapter = feedAdapter
-
-                if (itemAnimator is SimpleItemAnimator)
-                    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-
-                loadFeeds()
-
-                // TODO Incremental Pagination
-//                addOnScrollListener(object : InfiniteScrollListener(10, linearLayoutManager) {
-//                    override fun onScrolledToEnd(firstVisibleItemPosition: Int) {
-//                        feedAdapter.loadNewFeeds()
-//                    }
-//                })
+    private fun setupFeedRecyclerView() {
+        feedListView.apply {
+            layoutManager = LinearLayoutManager(context).apply {
+                reverseLayout = true
+                stackFromEnd = true
             }
+
+            adapter = feedAdapter
+
+            if (itemAnimator is SimpleItemAnimator)
+                (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+
+            loadFeeds()
+
+            // TODO Incremental Pagination
+//            addOnScrollListener(object : InfiniteScrollListener(10, linearLayoutManager) {
+//                override fun onScrolledToEnd(firstVisibleItemPosition: Int) {
+//                    feedAdapter.loadNewFeeds()
+//                }
+//            })
         }
     }
 

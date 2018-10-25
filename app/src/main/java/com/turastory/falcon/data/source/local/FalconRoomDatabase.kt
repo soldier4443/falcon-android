@@ -17,14 +17,14 @@ abstract class FalconRoomDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: FalconRoomDatabase? = null
 
-        fun getInstance(context: Context): FalconRoomDatabase? {
+        fun getInstance(context: Context): FalconRoomDatabase {
             if (INSTANCE == null) {
                 synchronized(FalconRoomDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                         FalconRoomDatabase::class.java, "falcon.db").build()
                 }
             }
-            return INSTANCE
+            return this.INSTANCE!!
         }
 
         fun destroyInstance() {

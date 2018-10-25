@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.turastory.falcon.ui.feed.FeedFragment
+import com.turastory.falcon.ui.feed.FeedViewModel
 import com.turastory.falcon.ui.makeGone
 import com.turastory.falcon.ui.makeVisible
 import com.turastory.falcon.ui.wallet.WalletFragment
@@ -17,6 +18,10 @@ class MainActivity : AppCompatActivity() {
 
     // TODO: more concrete implementation
     private var state: String = "initial"
+
+    private val feedViewModel by lazy {
+        FeedViewModel(Provider.provideDataSource(applicationContext))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +79,9 @@ class MainActivity : AppCompatActivity() {
         state = "feed"
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, FeedFragment.newInstance(), "feed")
+            .replace(R.id.container, FeedFragment.newInstance().apply {
+                setViewModel(feedViewModel)
+            }, "feed")
             .commitNow()
 
         addFeedButton.makeVisible()

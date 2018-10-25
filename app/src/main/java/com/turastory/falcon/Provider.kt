@@ -14,8 +14,8 @@ import com.turastory.falcon.data.source.local.FeedLocalDataSource
 object Provider {
     private val memoryDataSource = FeedMemoryDataSource()
 
-    fun provideDataSource(context: Context): FeedDataSource? =
-        FalconRoomDatabase.getInstance(context)?.let {
+    fun provideDataSource(context: Context): FeedDataSource =
+        FalconRoomDatabase.getInstance(context).let {
             return FeedDataSourceImpl(
                 memoryDataSource,
                 FeedLocalDataSource(it.feedDao()))
