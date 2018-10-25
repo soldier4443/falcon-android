@@ -22,4 +22,8 @@ class FeedLocalDataSource(private val feedDao: FeedDao) : FeedDataSource {
     override fun clearAllFeeds(): Completable {
         return Completable.fromCallable { feedDao.clearAll() }
     }
+
+    override fun updateFeed(newFeed: Feed): Completable {
+        return Completable.fromCallable { feedDao.updateFeed(newFeed) }
+    }
 }

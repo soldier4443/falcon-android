@@ -13,4 +13,5 @@ interface FeedDataSource {
     fun getAllFeeds(): Single<List<Feed>>
     fun addNewFeed(feed: Feed): Completable
     fun clearAllFeeds(): Completable
+    fun updateFeed(newFeed: Feed): Completable
 }

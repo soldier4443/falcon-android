@@ -15,7 +15,7 @@ object Provider {
     private val memoryDataSource = FeedMemoryDataSource()
 
     fun provideDataSource(context: Context): FeedDataSource =
-        FalconRoomDatabase.getInstance(context).let {
+        FalconRoomDatabase.getInstance(context.applicationContext).let {
             return FeedDataSourceImpl(
                 memoryDataSource,
                 FeedLocalDataSource(it.feedDao()))

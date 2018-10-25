@@ -28,4 +28,16 @@ class FeedMemoryDataSource : FeedDataSource {
             feeds.clear()
         }
     }
+
+    override fun updateFeed(newFeed: Feed): Completable {
+        return Completable.fromAction {
+            feeds.find { feed -> feed.id == newFeed.id }
+                ?.apply {
+                    this.markAsLiked = newFeed.markAsLiked
+                    this.like = newFeed.like
+                    this.comments = newFeed.comments
+                    this.content = newFeed.content
+                }
+        }
+    }
 }

@@ -15,7 +15,7 @@ import java.util.*
 //    foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["author_id"], onDelete = ForeignKey.CASCADE)])
 data class Feed(@PrimaryKey val id: Long,
                 @ColumnInfo(name = "author_id") val authorId: String,
-                var created: Date = Date(),
+                val created: Date = Date(),
                 var comments: Int = 0,
                 var like: Int = 0,
                 var content: String = "",
