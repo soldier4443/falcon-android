@@ -35,7 +35,7 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
                     this.markAsLiked = false
                 }
             }
-        
+
             notifyItemChanged(position)
         }
     }
@@ -62,7 +62,7 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
                 likeCountText.text = "${feed.like}"
                 commentCountText.text = "${feed.comments}"
                 contentText.text = feed.content
-    
+
                 if (feed.markAsLiked) {
                     markAsLiked(onLiked)
                 } else {
@@ -70,17 +70,17 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
                 }
             }
         }
-    
+
         private fun View.unmarkAsLiked(onLikeStateChanged: (Boolean) -> Unit) {
-            likeButton.background = null
+//            likeButton.background = null
             likeImage.setImageResource(R.drawable.ic_like_outline)
             likeButton.setOnClickListener {
                 onLikeStateChanged(true)
             }
         }
-    
+
         private fun View.markAsLiked(onLikeStateChanged: (Boolean) -> Unit) {
-            likeButton.setBackgroundResource(R.drawable.bg_button)
+//            likeButton.setBackgroundResource(R.drawable.bg_button)
             likeImage.setImageResource(R.drawable.ic_like)
             likeButton.setOnClickListener {
                 onLikeStateChanged(false)

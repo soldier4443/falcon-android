@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -23,20 +22,20 @@
     android:textSize="12dp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:text="5 minutes ago"/>
+    tools:text="5 minutes ago" />
 
   <TextView
     android:id="@+id/authorText"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="end|center"
-    android:layout_marginEnd="16dp"
     android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
     android:textColor="@color/black_light"
     android:textSize="12dp"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:text="by Tura"/>
+    tools:text="by Tura" />
 
   <ImageView
     android:id="@+id/imageView"
@@ -47,16 +46,16 @@
     android:src="@drawable/sample_image"
     android:visibility="gone"
     app:layout_constraintTop_toBottomOf="@+id/timeText"
-    tools:visibility="visible"/>
+    tools:visibility="visible" />
 
   <TextView
     android:id="@+id/contentText"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
     android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     android:layout_marginTop="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="12dp"
     android:gravity="center_vertical"
     android:lineSpacingMultiplier="1.2"
     android:textColor="@color/black"
@@ -65,18 +64,17 @@
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/imageView"
-    tools:text="한 여름밤의 꿈처럼 아득했던 그 세월은, 시간이 흘러 어느새 추억으로만 남아 그리움을 더하네."/>
+    tools:text="한 여름밤의 꿈처럼 아득했던 그 세월은, 시간이 흘러 어느새 추억으로만 남아 그리움을 더하네." />
 
   <RelativeLayout
     android:id="@+id/likeButton"
     android:layout_width="52dp"
     android:layout_height="24dp"
-    android:layout_marginBottom="12dp"
     android:layout_marginLeft="10dp"
-    android:background="@android:color/transparent"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_button"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    tools:background="@drawable/bg_button">
+    app:layout_constraintLeft_toLeftOf="parent">
 
     <ImageView
       android:id="@+id/likeImage"
@@ -85,7 +83,7 @@
       android:layout_alignParentStart="true"
       android:layout_centerVertical="true"
       android:layout_marginLeft="6dp"
-      android:src="@drawable/ic_like_outline"/>
+      android:src="@drawable/ic_like_outline" />
 
     <TextView
       android:id="@+id/likeCountText"
@@ -97,7 +95,7 @@
       android:gravity="center"
       android:textColor="@color/black"
       android:textSize="12dp"
-      tools:text="24k"/>
+      tools:text="24k" />
 
   </RelativeLayout>
 
@@ -105,8 +103,8 @@
     android:id="@+id/commentButton"
     android:layout_width="52dp"
     android:layout_height="24dp"
-    android:layout_marginBottom="12dp"
     android:layout_marginLeft="8dp"
+    android:layout_marginBottom="12dp"
     android:background="@android:color/transparent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toRightOf="@+id/likeButton">
@@ -118,7 +116,7 @@
       android:layout_alignParentStart="true"
       android:layout_centerVertical="true"
       android:layout_marginLeft="6dp"
-      android:src="@drawable/ic_chat_outline"/>
+      android:src="@drawable/ic_chat_outline" />
 
     <TextView
       android:id="@+id/commentCountText"
@@ -130,7 +128,7 @@
       android:gravity="center"
       android:textColor="@color/black"
       android:textSize="12dp"
-      tools:text="145"/>
+      tools:text="145" />
 
   </RelativeLayout>
 

@@ -24,24 +24,24 @@ import java.util.*
 
 
 class FeedFragment : Fragment() {
-    
+
     companion object {
         fun newInstance() = FeedFragment()
         var counter: Long = 0
     }
-    
+
     private val compositeDisposable = CompositeDisposable()
-    
+
     private val feedAdapter by lazy { FeedAdapter(feedListView) }
     private var viewModel: FeedViewModel? = null
-    
+
     private var subscription: Disposable? = null
-    
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.feed_fragment, container, false)
     }
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.apply {
@@ -50,10 +50,10 @@ class FeedFragment : Fragment() {
             }
         }
     }
-    
+
     override fun onStart() {
         super.onStart()
-        
+
         subscription = EventBus.subject.doOnError {
             Log.e("asdf", "Error while event bus.")
         }.subscribe {
@@ -63,14 +63,14 @@ class FeedFragment : Fragment() {
             }
         }
     }
-    
+
     override fun onStop() {
         super.onStop()
-        
+
         subscription?.dispose()
         compositeDisposable.dispose()
     }
-    
+
     private fun initializeViewModel(dataSource: FeedDataSource) {
         viewModel = FeedViewModel(dataSource)
         viewModel?.let { vm ->
@@ -79,14 +79,14 @@ class FeedFragment : Fragment() {
                     reverseLayout = true
                     stackFromEnd = true
                 }
-    
+
                 adapter = feedAdapter
-    
+
                 if (itemAnimator is SimpleItemAnimator)
                     (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-                
+
                 loadFeeds()
-    
+
                 // TODO Incremental Pagination
 //                addOnScrollListener(object : InfiniteScrollListener(10, linearLayoutManager) {
 //                    override fun onScrolledToEnd(firstVisibleItemPosition: Int) {
@@ -96,7 +96,7 @@ class FeedFragment : Fragment() {
             }
         }
     }
-    
+
     private fun loadFeeds() {
         viewModel?.let { vm ->
             compositeDisposable += vm.getFeeds()
@@ -110,7 +110,7 @@ class FeedFragment : Fragment() {
                 }
         }
     }
-    
+
     private fun addNewFeed() {
         Feed(counter,
             "tura", Date(Date().time - (3600 * 24 * 7).random() * 1000),
@@ -132,7 +132,7 @@ class FeedFragment : Fragment() {
             }
         }
     }
-    
+
     private val randomStrings: List<String> = mutableListOf(
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "Nullam id metus ac lectus auctor lobortis.",
