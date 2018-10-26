@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.turastory.falcon.R
+import com.turastory.falcon.ui.GlideApp
 import com.turastory.falcon.ui.inflate
 import kotlinx.android.synthetic.main.item_feed.view.*
 import org.ocpsoft.prettytime.PrettyTime
@@ -49,7 +50,6 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(feedItem: FeedItem) {
-            // TODO: 이미지 보여주기
             // TODO: content 너무 길 경우 요약
             with(itemView) {
                 val feed = feedItem.feed
@@ -59,6 +59,16 @@ class FeedAdapter(private val recyclerView: RecyclerView) : RecyclerView.Adapter
                 likeCountText.text = "${feed.like}"
                 commentCountText.text = "${feed.comments}"
                 contentText.text = feed.content
+
+                if (!feed.imageUrl.isEmpty()) {
+                    imageView.visibility = View.VISIBLE
+                    GlideApp.with(itemView)
+                        .load(feed.imageUrl)
+                        .centerCrop()
+                        .placeholder(R.drawable.placeholder)
+                        .into(imageView)
+                }
+
                 likeButton.setOnClickListener {
                     feedItem.onLikeChange(!feed.markAsLiked)
                 }

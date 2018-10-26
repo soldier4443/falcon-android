@@ -3,6 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+def getAccessKey(key) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+    return properties.get(key)
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -17,6 +23,9 @@ android {
                 arg("room.schemaLocation", "$projectDir/schemas".toString())
             }
         }
+
+        def key = "UNSPLASH_ACCESS_KEY"
+        buildConfigField("String", key, getAccessKey(key))
     }
     buildTypes {
         release {

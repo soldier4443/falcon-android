@@ -19,25 +19,6 @@ import java.util.*
 class FeedViewModel(private val dataSource: FeedDataSource) {
 
     companion object {
-        private val randomStrings: List<String> = mutableListOf(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "Nullam id metus ac lectus auctor lobortis.",
-            "Sed viverra nisl nec tellus hendrerit condimentum.",
-            "Ut pellentesque est id tempor porttitor.",
-            "Integer lacinia mi sit amet lacus aliquam tincidunt.",
-            "Nullam vel leo cursus, dictum ipsum in, vehicula eros.",
-            "Nunc volutpat felis ornare, auctor quam non, sollicitudin nisi.",
-            "Curabitur sit amet lectus non mi sagittis placerat at et lectus.",
-            "Phasellus molestie odio ornare ullamcorper placerat.",
-            "Etiam a nibh in tortor aliquet ultricies sed et urna.",
-            "In et massa sed erat fringilla suscipit.",
-            "Aliquam eu tortor vel diam tempor placerat.",
-            "Morbi mattis tellus vel urna lacinia sollicitudin.",
-            "Vivamus eget nibh vestibulum, pulvinar mauris at, sagittis tellus.",
-            "Praesent molestie magna id neque condimentum accumsan.",
-            "Nullam vitae dolor non dui lacinia varius.",
-            "Nulla dictum orci eget fringilla fringilla.")
-
         private var counter = 0L
     }
 
@@ -88,9 +69,7 @@ class FeedViewModel(private val dataSource: FeedDataSource) {
         val feed = Feed(counter++,
             "tura", Date(Date().time - (3600 * 24 * 7).random() * 1000),
             9.random(),
-            99.random(),
-            randomStrings.random(),
-            false)
+            99.random())
 
         // Should I get disposable and handle the subscription here?
         // My thoughts: No, because once the fragment is destroyed, then
